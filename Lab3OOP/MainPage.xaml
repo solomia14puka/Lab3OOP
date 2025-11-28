@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Lab3OOP.MainPage"
+             Title="Таблиця контактів">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="10">
+
+            <HorizontalStackLayout Spacing="8">
+                <Button Text="Відкрити JSON" Command="{Binding OpenJsonCommand}" />
+                <Button Text="Зберегти JSON" Command="{Binding SaveJsonCommand}" />
+            </HorizontalStackLayout>
+
+            <Label Text="Пошук за ПІБ:" />
+            <Entry Text="{Binding SearchText}" />
+
+            <HorizontalStackLayout Spacing="8">
+                <VerticalStackLayout WidthRequest="200">
+                    <Label Text="Фільтр за факультетом:" />
+                    <Picker ItemsSource="{Binding Faculties}" SelectedItem="{Binding SelectedFaculty}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout WidthRequest="200">
+                    <Label Text="Фільтр за видом співпраці:" />
+                    <Picker ItemsSource="{Binding Collaborations}" SelectedItem="{Binding SelectedCollaboration}" />
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="8">
+                <Button Text="Додати" Command="{Binding AddContactCommand}" BackgroundColor="#512BD4" TextColor="White"/>
+                <Button Text="Редагувати" Command="{Binding EditContactCommand}" />
+                <Button Text="Видалити" Command="{Binding DeleteContactCommand}" />
+                <Button Text="Очистити фільтри" 
+                 Command="{Binding ClearFiltersCommand}" BackgroundColor="#512BD4" TextColor="White"/>
+            </HorizontalStackLayout>
+
+            <Label Text="Список контактів:" FontAttributes="Bold" Margin="0,10,0,0"/>
+
+            <CollectionView ItemsSource="{Binding FilteredContacts}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedContact}"
+                            HeightRequest="400">
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions="200, 140, 140, 160, 100" Padding="4,2" BackgroundColor="#512BD4">
+                        <Label Text="ПІБ" Grid.Column="0" FontAttributes="Bold" TextColor="White" />
+                        <Label Text="Факультет" Grid.Column="1" FontAttributes="Bold" TextColor="White"/>
+                        <Label Text="Кафедра" Grid.Column="2" FontAttributes="Bold" TextColor="White"/>
+                        <Label Text="Співпраця" Grid.Column="3" FontAttributes="Bold" TextColor="White"/>
+                        <Label Text="Час" Grid.Column="4" FontAttributes="Bold" TextColor="White"/>
+                    </Grid>
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border StrokeThickness="1" Stroke="White" Padding="4" Margin="0,2">
+                            <Grid ColumnDefinitions="200, 140, 140, 160, 100">
+                                <Label Text="{Binding FullName}" Grid.Column="0" />
+                                <Label Text="{Binding Faculty}" Grid.Column="1" />
+                                <Label Text="{Binding Department}" Grid.Column="2" />
+                                <Label Text="{Binding Collaboration}" Grid.Column="3" />
+                                <Label Text="{Binding TimeFrame}" Grid.Column="4" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
