@@ -39,26 +39,28 @@
             <CollectionView ItemsSource="{Binding FilteredContacts}"
                             SelectionMode="Single"
                             SelectedItem="{Binding SelectedContact}"
-                            HeightRequest="400">
+                            HeightRequest="800">
                 <CollectionView.Header>
-                    <Grid ColumnDefinitions="200, 140, 140, 160, 100" Padding="4,2" BackgroundColor="#512BD4">
+                    <Grid ColumnDefinitions="200, 140, 140, 140, 140, 140" Padding="4,2" BackgroundColor="#512BD4">
                         <Label Text="ПІБ" Grid.Column="0" FontAttributes="Bold" TextColor="White" />
                         <Label Text="Факультет" Grid.Column="1" FontAttributes="Bold" TextColor="White"/>
                         <Label Text="Кафедра" Grid.Column="2" FontAttributes="Bold" TextColor="White"/>
-                        <Label Text="Співпраця" Grid.Column="3" FontAttributes="Bold" TextColor="White"/>
-                        <Label Text="Час" Grid.Column="4" FontAttributes="Bold" TextColor="White"/>
+                        <Label Text="Спеціальність" Grid.Column="3" FontAttributes="Bold" TextColor="White"/>
+                        <Label Text="Співпраця" Grid.Column="4" FontAttributes="Bold" TextColor="White"/>
+                        <Label Text="Час" Grid.Column="5" FontAttributes="Bold" TextColor="White"/>
                     </Grid>
                 </CollectionView.Header>
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Border StrokeThickness="1" Stroke="White" Padding="4" Margin="0,2">
-                            <Grid ColumnDefinitions="200, 140, 140, 160, 100">
+                            <Grid ColumnDefinitions="200, 140, 140, 140, 140, 140">
                                 <Label Text="{Binding FullName}" Grid.Column="0" />
                                 <Label Text="{Binding Faculty}" Grid.Column="1" />
                                 <Label Text="{Binding Department}" Grid.Column="2" />
-                                <Label Text="{Binding Collaboration}" Grid.Column="3" />
-                                <Label Text="{Binding TimeFrame}" Grid.Column="4" />
+                                <Label Text="{Binding Specialty}" Grid.Column="3" />
+                                <Label Text="{Binding Collaboration}" Grid.Column="4" />
+                                <Label Text="{Binding TimeFrame}" Grid.Column="5" />
                             </Grid>
                         </Border>
                     </DataTemplate>

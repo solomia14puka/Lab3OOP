@@ -27,6 +27,7 @@ namespace Lab3OOP.ViewModels
             AddContactCommand = new DelegateCommand(async _ => await AddContact());
             EditContactCommand = new DelegateCommand(async _ => await EditContact(), _ => SelectedContact != null);
             DeleteContactCommand = new DelegateCommand(async _ => await DeleteContact(), _ => SelectedContact != null);
+
             ClearFiltersCommand = new DelegateCommand(_ => ClearFilters());
         }
 
@@ -111,21 +112,16 @@ namespace Lab3OOP.ViewModels
             }
         }
 
-        // --- ОСНОВНІ ЗМІНИ ТУТ ---
-
         private async Task AddContact()
         {
             var newContact = new Contact();
 
-            // Передаємо функцію (ламбду), яка виконається ТІЛЬКИ ПІСЛЯ натискання "Зберегти"
             var vm = new EditContactViewModel(newContact, "Додати контакт", (savedContact) =>
             {
-                // Цей код запуститься, коли кнопка буде натиснута
                 if (!string.IsNullOrEmpty(savedContact.FullName))
                 {
                     Contacts.Add(savedContact);
 
-                    // Скидання і оновлення
                     SearchText = string.Empty;
                     SelectedFaculty = null;
                     SelectedCollaboration = null;
@@ -138,7 +134,6 @@ namespace Lab3OOP.ViewModels
 
             var page = new EditContactPage { BindingContext = vm };
             await Shell.Current.Navigation.PushModalAsync(page);
-            // Тут більше немає ніяких if, бо ми передали логіку всередину vm
         }
 
         private async Task EditContact()
@@ -147,7 +142,6 @@ namespace Lab3OOP.ViewModels
 
             var vm = new EditContactViewModel(SelectedContact, "Редагувати", (savedContact) =>
             {
-                // При редагуванні просто оновлюємо вигляд
                 RebuildFilters();
                 ApplyFilters();
             });
@@ -169,7 +163,6 @@ namespace Lab3OOP.ViewModels
             UpdateCanExecutes();
         }
 
-        // ... (ApplyFilters, RebuildFilters, UpdateCanExecutes залишаються без змін) ...
         private void ApplyFilters()
         {
             var query = Contacts.AsEnumerable();

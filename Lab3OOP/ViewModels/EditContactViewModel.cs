@@ -8,7 +8,6 @@ namespace Lab3OOP.ViewModels
     {
         public Contact Contact { get; private set; }
 
-        // Змінні для інтерфейсу
         public string UI_FullName { get; set; } = string.Empty;
         public string UI_Faculty { get; set; } = string.Empty;
         public string UI_Department { get; set; } = string.Empty;
@@ -18,12 +17,10 @@ namespace Lab3OOP.ViewModels
 
         public string Title { get; }
 
-        // --- НОВЕ: Дія, яка виконається при успішному збереженні ---
         private readonly Action<Contact>? _onSaved;
 
         public ICommand CancelCommand { get; }
 
-        // Додали параметр onSaved у конструктор
         public EditContactViewModel(Contact contact, string title, Action<Contact>? onSaved = null)
         {
             Contact = contact;
@@ -45,7 +42,6 @@ namespace Lab3OOP.ViewModels
 
         public async Task Save()
         {
-            // 1. Записуємо дані
             Contact.FullName = UI_FullName;
             Contact.Faculty = UI_Faculty;
             Contact.Department = UI_Department;
@@ -53,10 +49,8 @@ namespace Lab3OOP.ViewModels
             Contact.Collaboration = UI_Collaboration;
             Contact.TimeFrame = UI_TimeFrame;
 
-            // 2. ВИКЛИКАЄМО ФУНКЦІЮ ЗБЕРЕЖЕННЯ (яку нам передав MainViewModel)
             _onSaved?.Invoke(Contact);
 
-            // 3. Закриваємо вікно
             await Shell.Current.Navigation.PopModalAsync();
         }
 

@@ -13,7 +13,6 @@ public partial class EditContactPage : ContentPage
     {
         if (BindingContext is EditContactViewModel vm)
         {
-            // Ручне перенесення даних
             if (NameEntry != null) vm.UI_FullName = NameEntry.Text;
             if (FacEntry != null) vm.UI_Faculty = FacEntry.Text;
             if (DepEntry != null) vm.UI_Department = DepEntry.Text;
